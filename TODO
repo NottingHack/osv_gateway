@@ -1,0 +1,20 @@
+Open Vend System Web Gateway TODO
+
+Web Socket Server
+	build proof of concept server (and test client)
+	BUILD SERVER!
+	
+Gateway
+	DB schema
+	product page
+		link to paypal.  paypal testing account?
+		Vend instruction
+	Interface to web socket
+	** Machine can now vend
+	Admin Interface
+		Login/sessions
+		View machines/products
+		Update stock level (QR Code?)
+		Add product
+		Add machine
+		Generate machine QR codes
