@@ -1,12 +1,12 @@
-drop table if exists products;
+drop table if exists transactions;
 
-create table products 
+create table transactions
 (
-	id    		int not null auto_increment,
-	machine_id	int not null,
-	product_id	int not null,
-	buyer_id		int not null,
-	datetime		timestamp default CURRENT_TIMESTAMP,			
+	id          int not null auto_increment,
+	machine_id  int not null,
+	product_id  int not null,
+	buyer_id    int not null,
+	datetime    timestamp default CURRENT_TIMESTAMP,			
 	
 	primary key (id)
 ) ENGINE = InnoDB; 

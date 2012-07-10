@@ -5,12 +5,14 @@ Web Socket Server
 	BUILD SERVER!
 	
 Gateway
-	DB schema
+	X DB schema
+	Test on Rommie
+	DB stored procedures
 	product page
 		link to paypal.  paypal testing account?
 		Vend instruction
 	Interface to web socket
-	** Machine can now vend
+	** Machine can now vend (dependant on Web Socket Server)
 	Admin Interface
 		Login/sessions
 		View machines/products
