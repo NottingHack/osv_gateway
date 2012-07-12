@@ -1,0 +1,25 @@
+<?php
+/**
+ * Common File
+ *
+ * Open Vend System common file. Loads in all external libraries, sets up
+ * template variables and initilises system variables
+ *
+ * @author James Hayward <jhayward1980@gmail.com>
+ * @version 1.0
+ */
+
+define('ROOT_DIR', dirname(__FILE__) . '/');
+define('COMMON_DIR', ROOT_DIR . 'common/');
+define('PHP_DIR', COMMON_DIR . 'php/');
+
+define('ROOT_URL', '/ovs/');
+define('COMMON_URL', ROOT_URL . '_common/');
+define('IMG_URL', COMMON_URL . 'images/');
+define('JS_URL', COMMON_URL . 'js/');
+define('CSS_URL', COMMON_URL . 'css/');
+
+require_once(PHP_DIR . 'smarty.php');
+
+
+?>
