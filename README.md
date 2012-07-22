@@ -1,5 +1,14 @@
 Open Vend System Web Gateway
 
+Installation
+
+You must also create the directories:
+
+./_common/templates_c
+./_common/cache
+
+and make them writable by the php user account.
+
 The server side part of the Open Vend System has two parts:
 
 Web Socket Server
