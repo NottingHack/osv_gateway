@@ -22,7 +22,34 @@ if ($oResult->num_rows > 0) {
 }
 $oResult->close();
 
-var_dump($aProduct);
+/* Does the machine think it has stock? */
+if (!$oVendComm->checkStock($iMachineID, $iHoppeID)) {
+	$oSmarty->assign("title", "Out of Stock");
+	$aParas = array(
+					'Sorry, but the vending machine says it is out of stock of ' . $aProduct['name'] . '.',
+					'Please try another product.',
+					);
+	$oSmarty->assign("message", $aParas);
+	
+	$oSmarty->display('message.tpl');
+	die;
+}
+
+/* Do we think we have stock? */
+if (($aProduct['stock'] - $aProduct['reserved']) <= 0) {
+	$oSmarty->assign("title", "Out of Stock");
+	$aParas = array(
+					'Sorry, but the stock in the vending machine has already been bought and is reserved.',
+					'Please try another product.',
+					);
+	$oSmarty->assign("message", $aParas);
+	
+	$oSmarty->display('message.tpl');
+	die;
+}
+
+
+
 
 
 ?>

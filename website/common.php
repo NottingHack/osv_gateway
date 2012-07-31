@@ -33,4 +33,7 @@ require_once(PHP_DIR . 'security.php');
 
 require_once(SECURE_DIR . 'inst_db.php');
 
+require_once(PHP_DIR . 'class.vendcomm.php');
+$oVendComm = new VendComm();
+
 ?>
