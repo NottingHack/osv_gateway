@@ -6,11 +6,20 @@ Web Socket Server
 	
 Gateway
 	X DB schema
-	Test on Rommie
+	X Test on Rommie
 	DB stored procedures
-	product page
-		link to paypal.  paypal testing account?
-		Vend instruction
+	product page (buyproduct.php)
+		X link to paypal.  paypal testing account?
+		Reserve stock
+		Insert transaction - status pending
+	Vend page (vendproduct.php)
+		X Download transaction details from PayPal
+		Check transaction details
+		Transaction status - to vend
+		Vend button
+			Remove stock reservation
+			Change stock level
+			Transaction status - completed
 	Interface to web socket
 	** Machine can now vend (dependant on Web Socket Server)
 	Admin Interface

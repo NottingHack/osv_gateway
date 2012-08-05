@@ -7,7 +7,7 @@ $pp_hostname = "www.sandbox.paypal.com";
 $req = 'cmd=_notify-synch';
  
 $tx_token = $_GET['tx'];
-$auth_token = "spFWMH-CRNk16eKURRgmDhHRwyJkhanwRi6tM2MCz_WS_mobdQpnYTqFeWq";
+$auth_token = $aPayPal['token'];
 $req .= "&tx=$tx_token&at=$auth_token";
  
 $ch = curl_init();

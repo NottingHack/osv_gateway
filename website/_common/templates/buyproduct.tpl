@@ -6,12 +6,12 @@
 <p>From {$product.machine} @ {$product.location}</p>
 
 {* Buy it now button *}
-<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-<input type="hidden" name="business" value="osv_1344176713_biz@purplegecko.co.uk">
+<form action="{$paypal.url}" method="post">
+<input type="hidden" name="business" value="{$paypal.business}">
 <input type="hidden" name="cmd" value="_xclick">
 <input type="hidden" name="charset" value="utf-8">
 <input type="hidden" name="return" value="http://localhost:4000/osv/vendproduct.php">
-<input type="hidden" name="currency_code" value="GBP">
+<input type="hidden" name="currency_code" value="($currency.code}">
 <input type="hidden" name="amount" value="{$product.price / 100}">
 <input type="hidden" name="item_name" value="{$product.name}">
 <input type="hidden" name="item_number" value="{$product.machine_id}-{$product.hopper_id}">

@@ -53,6 +53,8 @@ if (($aProduct['stock'] - $aProduct['reserved']) <= 0) {
 
 
 $oSmarty->assign("product", $aProduct);
+$oSmarty->assign("paypal", $aPayPal);
+$oSmarty->assign("currency", $aCurrency);
 $oSmarty->display("buyproduct.tpl");
 
 

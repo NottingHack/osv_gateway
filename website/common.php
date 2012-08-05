@@ -9,11 +9,8 @@
  * @version 1.0
  */
 
-// Admin contact, outputs on error messages if things go wrong
-$aAdmin = array(
-				'name'	=>	'Nottingham Hackspace',
-				'email'	=>	'info@nottinghack.org.uk',
-				);
+// Import local settings
+require_once('config.php');
 
 define('ROOT_DIR', dirname(__FILE__) . '/');
 define('SECURE_DIR', dirname(__FILE__) . '/../../int_secure/');
