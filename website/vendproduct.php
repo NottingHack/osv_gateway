@@ -1,7 +1,5 @@
 <?php
 require_once('common.php');
-
-$pp_hostname = "www.sandbox.paypal.com"; 
  
 // read the post from PayPal system and add 'cmd'
 $req = 'cmd=_notify-synch';
@@ -11,7 +9,7 @@ $auth_token = $aPayPal['token'];
 $req .= "&tx=$tx_token&at=$auth_token";
  
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, "https://$pp_hostname/cgi-bin/webscr");
+curl_setopt($ch, CURLOPT_URL, $aPayPal['url']);
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $req);

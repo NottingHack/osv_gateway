@@ -8,14 +8,15 @@ Gateway
 	X DB schema
 	X Test on Rommie
 	DB stored procedures
-	product page (buyproduct.php)
+	X product page (buyproduct.php)
 		X link to paypal.  paypal testing account?
-		Reserve stock
-		Insert transaction - status pending
+		X Reserve stock
+		X Insert transaction - status pending
 	Vend page (vendproduct.php)
 		X Download transaction details from PayPal
 		Check transaction details
 		Transaction status - to vend
+			Update buyer
 		Vend button
 			Remove stock reservation
 			Change stock level
