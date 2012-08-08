@@ -1,4 +1,4 @@
-INSERT INTO machines VALUES(1, "OSV Test", "Nottingham Hackspace");
+INSERT INTO machines VALUES(1, "OSV Test", "Nottingham Hackspace", "00:00:00:00:00:00");
 
 INSERT INTO products VALUES(1, "Sugru, Red", 200);
 INSERT INTO products VALUES(2, "Sugru, Blue", 200);

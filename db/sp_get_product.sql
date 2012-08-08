@@ -13,7 +13,7 @@ CREATE PROCEDURE sp_get_product
 SQL SECURITY DEFINER
 BEGIN
    
-   SELECT p.id, p.name, p.price, h.stock, m.name as machine, m.location
+   SELECT p.id, p.name, p.price, h.stock, h.reserved, m.name as machine, m.location
    FROM products p
    INNER JOIN hoppers h ON p.id = h.product_id
    INNER JOIN machines m on h.machine_id = m.id
