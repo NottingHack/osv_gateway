@@ -9,7 +9,7 @@ create table transactions
 	price       int not null,
 	buyer_id    int not null,
 	datetime    timestamp default CURRENT_TIMESTAMP,	
-	status      varchar(8),	
+	status      varchar(10),	
 	
 	primary key (id)
 ) ENGINE = InnoDB; 

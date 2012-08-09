@@ -1,6 +1,18 @@
 <?php
 require_once('common.php');
 
+/* Check transactions table and remove old ones */
+$oResult = $oInstDB->query('call sp_check_trans()');
+if ($oResult->num_rows > 0) {
+	$aResult = $oResult->fetch_assoc();
+}
+$oInstDB->next_result();
+if (isset($aResult['err'])) {
+	errorDie("Fatal Error", "BP000: " . $aResult['err']);
+}
+
+/* let's get on with the buying! */
+
 if (isset($_GET['machine']) and isNumber($_GET['machine'])) {
 	$iMachineID = intval($_GET['machine']);
 	if (isset($_GET['hopper']) and isNumber($_GET['hopper'])) {
