@@ -19,6 +19,7 @@ class OVS_Smarty extends Smarty {
 
 $oSmarty = new OVS_Smarty();
 
+$oSmarty->assign('http', HTTP);
 $oSmarty->assign('root_url', ROOT_URL);
 $oSmarty->assign('common_url', COMMON_URL);
 $oSmarty->assign('img_url', IMG_URL);

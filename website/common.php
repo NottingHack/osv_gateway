@@ -17,11 +17,19 @@ define('SECURE_DIR', dirname(__FILE__) . '/../../int_secure/');
 define('COMMON_DIR', ROOT_DIR . '_common/');
 define('PHP_DIR', COMMON_DIR . 'php/');
 
-define('ROOT_URL', '/ovs/');
 define('COMMON_URL', ROOT_URL . '_common/');
 define('IMG_URL', COMMON_URL . 'images/');
 define('JS_URL', COMMON_URL . 'js/');
 define('CSS_URL', COMMON_URL . 'css/');
+
+// build up the server address
+define('SERVER', $_SERVER["HTTP_HOST"]);
+$sHTTP = "http://";
+if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) {
+    $sHTTP = "https://";
+}
+define('HTTP', $sHTTP . SERVER);
+
 
 require_once(PHP_DIR . 'smarty.php');
 require_once(PHP_DIR . 'functions.php');

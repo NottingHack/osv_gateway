@@ -9,6 +9,9 @@
  * @version 1.0
  */
 
+// Root URL
+define('ROOT_URL', '/ovs/');
+
 // Admin contact, outputs on error messages if things go wrong
 $aAdmin = array(
 				'name'	=>	'Nottingham Hackspace',
