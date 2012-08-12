@@ -13,7 +13,7 @@ class OVS_Smarty extends Smarty {
 		$this->setConfigDir(COMMON_DIR . 'config');
 		$this->setCacheDir(COMMON_DIR . 'cache');
 		
-		$this->caching = Smarty::CACHING_LIFETIME_CURRENT;
+		$this->caching = Smarty::CACHING_OFF;
 	}
 }
 

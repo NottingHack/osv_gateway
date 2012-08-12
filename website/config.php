@@ -10,7 +10,7 @@
  */
 
 // Root URL
-define('ROOT_URL', '/ovs/');
+define('ROOT_URL', '/osv/');
 
 // Admin contact, outputs on error messages if things go wrong
 $aAdmin = array(
@@ -26,10 +26,9 @@ $aCurrency = array(
 
 // PayPal settings
 $aPayPal = array(
-				 'url'		=>	'https://www.sandbox.paypal.com/cgi-bin/webscr',
+				 'hostname'	=>	'www.sandbox.paypal.com',
 				 'business'	=>	'osv_1344176713_biz@purplegecko.co.uk',
 				 'token'	=>	'spFWMH-CRNk16eKURRgmDhHRwyJkhanwRi6tM2MCz_WS_mobdQpnYTqFeWq',
 				 );
-				 
-
+$aPayPal['url'] = 'https://' . $aPayPal['hostname'] . '/cgi-bin/webscr';
 ?>

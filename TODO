@@ -14,9 +14,9 @@ Gateway
 		X Insert transaction - status pending
 	Vend page (vendproduct.php)
 		X Download transaction details from PayPal
-		Check transaction details
-		Transaction status - to vend
-			Update buyer
+		X Check transaction details
+		X Transaction status - to vend
+			X Update buyer
 		Vend button
 			Remove stock reservation
 			Change stock level
