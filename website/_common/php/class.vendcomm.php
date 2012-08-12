@@ -12,6 +12,8 @@ class VendComm {
 	}
 	
 	public function vend($iMachineID, $iHopperID) {
+		var_dump($iMachineID);
+		var_dump($iHopperID);
 		return true;
 	}
 	

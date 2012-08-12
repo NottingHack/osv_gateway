@@ -30,7 +30,7 @@ BEGIN
 	ELSEIF status = 'complete' THEN
 	    start transaction;
             UPDATE transactions t SET t.status = 'complete' WHERE t.id = trans_id;
-            SELECT t.machine_id, t.hopper_id INTO machine_id,hopper_id FROM transactions t WHERE t.id = trans_id;
+            SELECT t.machine_id, t.hopper_id INTO machine_id, hopper_id FROM transactions t WHERE t.id = trans_id;
             UPDATE hoppers h SET h.reserved = (h.reserved - 1), h.stock = (h.stock - 1) WHERE h.machine_id = machine_id AND h.hopper_id = hopper_id;
         commit;
         

@@ -139,7 +139,39 @@ if ($bPayPal == true) {
 else {
 	//  Vend!
 	
+	// Get transaction details
+	$oResult = $oInstDB->query('call sp_get_transaction(' . $iTrans . ')');
+	if ($oResult->num_rows > 0) {
+		$aTrans = $oResult->fetch_assoc();
+	}
+	else {
+		machine_failed('VM005');
+	}
+	$oInstDB->next_result();
+	$oResult->close();
 	
+	if (!$oVendComm->vend($aTrans['machine_id'], $aTrans['hopper_id'])) {
+		// machine failed to vend
+		machine_failed('VM005');
+	}
+	else {
+		// we're done, the machine says it has vended
+		// update transaction and remove stock
+		$oResult = $oInstDB->query('call sp_update_trans(' . $iTrans . ', "complete", 0)');
+		if ($oResult->num_rows > 0) {
+			$aResult = $oResult->fetch_assoc();
+		}
+		else {
+			// log this somewhere, noone will actually care!
+			var_dump("failed");
+			die;
+		}
+		$oInstDB->next_result();
+		$oResult->close();
+		
+		$oSmarty->assign('admin', $aAdmin);
+		$oSmarty->display('complete.tpl');
+	}
 }
 
 
@@ -158,5 +190,20 @@ function refund_msg($sCode) {
 	$oSmarty->display('message.tpl');
 	die;
 }
+
+function machine_failed($sCode) {
+	global $oSmarty, $aAdmin;
+	
+	$oSmarty->assign("title", "Problem with the vending machine");
+	$aParas = array(
+					'Sorry, but the vending machine has reported an issue with vending your purchase.',
+					'Please report this to <a href="mailto:' . $aAdmin['email'] . '">' . $aAdmin['name'] . '</a> to process a refund, quoting ' . $sCode . '.',
+					);
+	$oSmarty->assign("message", $aParas);
+	
+	$oSmarty->display('message.tpl');
+	die;
+}
+
 
 ?>

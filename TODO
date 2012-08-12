@@ -17,10 +17,11 @@ Gateway
 		X Check transaction details
 		X Transaction status - to vend
 			X Update buyer
-		Vend button
-			Remove stock reservation
-			Change stock level
-			Transaction status - completed
+		X Vend button
+			X Remove stock reservation
+			X Change stock level
+			X Transaction status - completed
+			Log problems with stock update
 	Interface to web socket
 	** Machine can now vend (dependant on Web Socket Server)
 	Admin Interface
