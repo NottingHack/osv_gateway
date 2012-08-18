@@ -1,0 +1,9 @@
+ssh pi@10.0.0.219
+password: pi
+
+sudo chmod a+rwx /dev/i2c-0
+
+cd osvend
+./osvend
+
+
