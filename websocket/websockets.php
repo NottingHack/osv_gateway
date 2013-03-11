@@ -1,5 +1,8 @@
 <?php
 
+// adding in a user defined timeout
+// JH - 2013-03-06
+
 //require_once('./daemonize.php');
 require_once('./users.php');
 
@@ -14,6 +17,8 @@ abstract class WebSocketServer {
 	protected $headerOriginRequired                 = false;
 	protected $headerSecWebSocketProtocolRequired   = false;
 	protected $headerSecWebSocketExtensionsRequired = false;
+	// adding 2013-03-06
+	protected $timers;
 
 	function __construct($addr, $port, $bufferLength = 2048) {
 		$this->maxBufferSize = $bufferLength;
@@ -30,17 +35,27 @@ abstract class WebSocketServer {
 			}
 			$read = $this->sockets;
 			$write = $except = null;
-			@socket_select($read,$write,$except,null);
+			$change = socket_select($read,$write,$except,0,500000);
+			
+			//$this->stdout($change);
+			$this->checkTimers();
+			
+			if ($change === 0) {
+				continue;
+			}
+			
 			foreach ($read as $socket) {
 				if ($socket == $this->master) {
 					$client = socket_accept($socket);
 					if ($client < 0) {
 						$this->stderr("Failed: socket_accept()");
 						continue;
-					} else {
+					}
+					else {
 						$this->connect($client);
 					}
-				} else {
+				}
+				else {
 					$numBytes = @socket_recv($socket,$buffer,$this->maxBufferSize,0); // todo: if($numBytes === false) { error handling } elseif ($numBytes === 0) { remote client disconected }
 					if ($numBytes == 0) {
 						$this->disconnect($socket);
@@ -48,22 +63,24 @@ abstract class WebSocketServer {
 						$user = $this->getUserBySocket($socket);
 						if (!$user->handshake) {
 							$this->doHandshake($user,$buffer);
-						} else {
-              if ($message = $this->deframe($buffer, $user)) {
-                $this->process($user, utf8_encode($message));
-                if($user->hasSentClose) {
-                  $this->disconnect($user->socket);
-                }
-              } else {
+						}
+						else {
+							if ($message = $this->deframe($buffer, $user)) {
+								$this->process($user, utf8_encode($message));
+								if($user->hasSentClose) {
+									$this->disconnect($user->socket);
+								}
+							}
+							else {
 								do {
 									$numByte = @socket_recv($socket,$buffer,$this->maxBufferSize,MSG_PEEK);
 									if ($numByte > 0) {
 										$numByte = @socket_recv($socket,$buffer,$this->maxBufferSize,0);
 										if ($message = $this->deframe($buffer,$user)) {
 											$this->process($user,$message);
-                      if($user->hasSentClose) {
-                        $this->disconnect($user->socket);
-                      }
+											if($user->hasSentClose) {
+												$this->disconnect($user->socket);
+											}
 										}
 									}
 								} while($numByte > 0);
@@ -87,7 +104,7 @@ abstract class WebSocketServer {
   protected function send($user,$message) {
 		//$this->stdout("> $message");
 		$message = $this->frame($message,$user);
-		socket_write($user->socket,$message,strlen($message));
+		$this->stdout(socket_write($user->socket,$message,strlen($message)));
 	}
 
 	protected function connect($socket) {
@@ -492,5 +509,44 @@ abstract class WebSocketServer {
 
 		}
 		echo ")\n";
+	}
+	
+	protected function addTimeout($user, $timeout = 5) {
+		if (!is_array($this->timers)) {
+			$timers = array();
+		}
+		
+		$id = sha1(microtime());
+		
+		$this->timers[$id] = array(
+								'user'		=>	$user,
+								'start'		=>	time(),
+								'length'	=>	$timeout,
+								);
+		$this->stdout("Add Timeout: " . $id);
+		return $id;
+	}
+	
+	protected function checkTimers() {
+		if (is_array($this->timers)) {
+			foreach ($this->timers as $id => $timer) {
+				$this->stdout($id . ": " . $timer['start'] . ":" . time());
+				if ((time() - $timer['start']) > $timer['length']) {
+					$this->disconnect($timer['user']->socket);
+					$this->removeTimeout($id);
+				}
+			}
+		}
+	}
+	
+	protected function removeTimeout($oldid) {
+		$this->stdout("Remove Timeout: " . $oldid);
+		$newTimers = array();
+		foreach ($this->timers as $id => $timer) {
+			if ($id != $oldid) {
+				$newTimers[$id] = $timer;
+			}
+		}
+		$this->timers = $newTimers;
 	}
 }

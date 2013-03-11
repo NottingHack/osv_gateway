@@ -43,8 +43,10 @@ if ($bPayPal == true) {
 		$aTransData = array();
 		if (strcmp($aLines[0], "SUCCESS") == 0) {
 			for ($i = 1; $i < count($aLines); $i++){
-				list($sKey, $sVal) = explode("=", $aLines[$i]);
-				$aTransData[urldecode($sKey)] = urldecode($sVal);
+				if ($aLines[$i] != "") {
+					list($sKey, $sVal) = explode("=", $aLines[$i]);
+					$aTransData[urldecode($sKey)] = urldecode($sVal);
+				}
 			}
 		}
 		else {

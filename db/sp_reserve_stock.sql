@@ -65,4 +65,4 @@ BEGIN
 END //
 DELIMITER ;
 
-GRANT EXECUTE ON PROCEDURE sp_reserve_stock TO 'nh-web'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_reserve_stock TO 'web19-openkiosk'@'%';

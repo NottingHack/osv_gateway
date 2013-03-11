@@ -25,4 +25,4 @@ BEGIN
 END //
 DELIMITER ;
 
-GRANT EXECUTE ON PROCEDURE sp_add_buyer TO 'nh-web'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_add_buyer TO 'web19-openkiosk'@'%';

@@ -41,4 +41,8 @@ require_once(SECURE_DIR . 'inst_db.php');
 require_once(PHP_DIR . 'class.vendcomm.php');
 $oVendComm = new VendComm();
 
+if (!$oVendComm->bConnected) {
+	errorDie("Fatal Error", "CL001");
+}
+
 ?>

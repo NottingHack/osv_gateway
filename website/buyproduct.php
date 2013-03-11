@@ -48,6 +48,22 @@ $oResult->close();
 $aProduct['machine_id'] = $iMachineID;
 $aProduct['hopper_id'] = $iHopperID;
 
+/* Is the machine connected? */
+$sMacStatus = $oVendComm->checkStatus($iMachineID); 
+if ($sMacStatus != "online") {
+	$oSmarty->assign("title", "Problem with Vending Machine");
+	$aParas = array(
+					'Sorry, but there is a problem with the vending machine.',
+					'Error:',
+					$sMacStatus,
+					);
+	$oSmarty->assign("message", $aParas);
+	
+	$oSmarty->display('message.tpl');
+	die;
+}
+
+
 /* Does the machine think it has stock? */
 if (!$oVendComm->checkStock($iMachineID, $iHopperID)) {
 	$oSmarty->assign("title", "Out of Stock");

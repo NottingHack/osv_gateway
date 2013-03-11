@@ -20,4 +20,4 @@ BEGIN
 END //
 DELIMITER ;
 
-GRANT EXECUTE ON PROCEDURE sp_get_transaction TO 'nh-web'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_get_transaction TO 'web19-openkiosk'@'%';

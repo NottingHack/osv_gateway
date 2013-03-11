@@ -23,4 +23,4 @@ BEGIN
 END //
 DELIMITER ;
 
-GRANT EXECUTE ON PROCEDURE sp_get_product TO 'nh-web'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_get_product TO 'web19-openkiosk'@'%';

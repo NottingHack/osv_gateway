@@ -40,4 +40,4 @@ BEGIN
 END //
 DELIMITER ;
 
-GRANT EXECUTE ON PROCEDURE sp_update_trans TO 'nh-web'@'localhost';
+GRANT EXECUTE ON PROCEDURE sp_update_trans TO 'web19-openkiosk'@'%';
